@@ -1,0 +1,29 @@
+
+def f(x):
+    return x**2 - 6*x + 5
+
+def regula_falsi(func, a, b, tol):
+    if func(a) * func(b) >= 0:
+        print("Metode Regula Falsi tidak bisa diterapkan pada interval ini.")
+        return None
+
+    while (b - a) >= tol:
+        c = (a * func(b) - b * func(a)) / (func(b) - func(a))
+
+        if func(c) == 0:
+            return round(c, 3)
+
+        if func(c) * func(a) < 0:
+            b = c
+        else:
+            a = c
+
+    return round((a + b) / 2, 3)
+
+a = 3
+b = 6
+toleransi = 0.001  # Ketelitian 3 desimal
+
+hasil = regula_falsi(f, a, b, toleransi)
+if hasil is not None:
+    print(f"Akar yang ditemukan: {hasil}")
